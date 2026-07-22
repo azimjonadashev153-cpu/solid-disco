@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigator - Premium Xaritalar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+        .glass {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(20px);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        }
+        
+        .pin {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0f] text-white overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center text-2xl">🧭</div>
+                <div>
+                    <span class="text-3xl font-bold tracking-tighter">Navigator</span>
+                </div>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm">
+                <a href="#" class="hover:text-cyan-400 transition">Yaqin joylar</a>
+                <a href="#" class="hover:text-cyan-400 transition">Xarita</a>
+                <a href="#" class="hover:text-cyan-400 transition">Namoz vaqti</a>
+                <a href="#" class="hover:text-cyan-400 transition">Ob-havo</a>
+            </div>
+            <button onclick="alert('Demo: Kirish sahifasi ochilmoqda...')" 
+                    class="bg-white text-black px-8 py-3 rounded-2xl font-semibold hover:bg-cyan-400 hover:text-black transition">
+                Boshlash
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <div class="absolute inset-0 bg-[radial-gradient(#22d3ee_1px,transparent_1px)] [background-size:40px_40px] opacity-20"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <h1 class="text-7xl font-bold mb-6 tracking-tighter">
+                Qayerga <span class="text-cyan-400">boramiz?</span>
+            </h1>
+            
+            <div id="typing" class="text-3xl h-20 text-white/90 mb-12 font-light"></div>
+            
+            <div class="max-w-xl mx-auto">
+                <div class="glass rounded-3xl p-3 flex items-center shadow-2xl border border-white/10">
+                    <input id="searchInput" type="text" 
+                           class="flex-1 bg-transparent px-8 py-6 text-xl focus:outline-none placeholder:text-white/60" 
+                           placeholder="Manzil yoki joy nomini kiriting...">
+                    <button onclick="performSearch()" 
+                            class="bg-gradient-to-r from-cyan-500 to-blue-600 px-12 py-6 rounded-2xl font-semibold flex items-center gap-3 hover:scale-105 transition">
+                        <i class="fas fa-search"></i>
+                        <span>Qidirish</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex justify-center gap-6 text-sm">
+                <div onclick="quickSearch('kafe')" class="cursor-pointer hover:text-cyan-400">☕ Kafe</div>
+                <div onclick="quickSearch('masjid')" class="cursor-pointer hover:text-cyan-400">🕌 Masjid</div>
+                <div onclick="quickSearch('shifoxona')" class="cursor-pointer hover:text-cyan-400">🏥 Shifoxona</div>
+                <div onclick="quickSearch('bank')" class="cursor-pointer hover:text-cyan-400">🏧 Bank</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phrases = ["Qayerga bormoqchisiz?", "Yaqin joylarni toping", "Navigator bilan oson!"];
+        let i = 0;
+        const typingEl = document.getElementById('typing');
+        
+        function typePhrase() {
+            typingEl.textContent = phrases[i];
+            i = (i + 1) % phrases.length;
+        }
+        
+        setInterval(typePhrase, 2800);
+        typePhrase();
+        
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                alert(`"${query}" bo'yicha qidiruv natijalari topildi! (Bu demo versiya)`);
+            } else {
+                alert("Iltimos, qidiruv so'rovini kiriting!");
+            }
+        }
+        
+        function quickSearch(term) {
+            document.getElementById('searchInput').value = term;
+            performSearch();
+        }
+    </script>
+</body>
+</html>
